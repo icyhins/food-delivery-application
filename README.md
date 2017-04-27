@@ -53,8 +53,9 @@ POST http://localhost:8080/order
 Request Body:
 [{
 userInfo:{
-    userName:'Jhon Doe'
-    phoneNumber:'999111'
+    name:'John Doe'
+    phone:'999111',
+    address:''
 },
 itemInfoList:{[
     itemInfo:{
@@ -73,6 +74,7 @@ itemInfoList:{[
             quantity:1
         }
 ]},
+
 notes:'Please help to give more xxxx, because I want some blablabla'
 }]
 ```
@@ -95,8 +97,8 @@ payType:'CreditType',
 creditNumber:'123456789',
 expirationDate:'2020-01-01',
 securityCode:'123',
-ownerFirstName:'',
-ownerFamilyName:''
+ownerFirstName:'John',
+ownerFamilyName:'Doe'
 }]
 ```
 
@@ -112,4 +114,5 @@ GET http://localhost:8080/recommend/{foodName}
 ```
 
 #LICENSE
+
 [Apache License 2.0](https://github.com/icyhins/food-delivery-service-application/blob/master/LICENSE "Apache License 2.0")
