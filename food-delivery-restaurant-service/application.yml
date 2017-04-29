@@ -1,0 +1,10 @@
+server:
+  port: 9004
+
+spring:
+  application:
+    name: food-delivery-restaurant-service
+  cloud:
+    stream:
+      bindings:
+        output: food_delivery
