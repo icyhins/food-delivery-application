@@ -1,4 +1,4 @@
-package silver.bittiger.cs504.food.order.bean;
+package silver.bittiger.cs504.food.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -20,7 +19,32 @@ import java.util.Random;
 public class OrderInfoBO {
 
     public enum OrderType{
-        NORMAL, PROMOTION;
+        NORMAL("Normal"), PROMOTION("Promotion"), FREEPROMOTION("FreePromotion");
+
+        private String value;
+
+        OrderType(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return this.getValue();
+        }
+
+        /**
+         * Instead of Enum.valueOf(), get Enum by value
+         * */
+        public static OrderType getEnum(String value) {
+            for(OrderType v : values())
+                if(v.getValue().equalsIgnoreCase(value)) return v;
+            throw new IllegalArgumentException();
+        }
+
     }
 
     @Embedded
@@ -45,19 +69,24 @@ public class OrderInfoBO {
     @Embedded
     private List<ItemInfoBO> itemInfoBOList;
 
+    private String dietRestrictionNote;
+
     @JsonCreator
-    public OrderInfoBO(@JsonProperty("userInfo") UserInfoBO userInfoBO,
+    public OrderInfoBO(
+            @JsonProperty("userInfo") UserInfoBO userInfoBO,
     @JsonProperty("orderStatus") String orderStatus,
     @JsonProperty("orderType") String orderType,
     @JsonProperty("orderAmount") String orderAmount,
-    @JsonProperty("itemInfoList") List<ItemInfoBO> itemInfoBOList){
+    @JsonProperty("itemInfoList") List<ItemInfoBO> itemInfoBOList,
+    @JsonProperty("notes") String dietRestrictionNote){
         this.userInfoBO = userInfoBO;
         this.orderStatus = orderStatus;
-        this.orderType = OrderType.valueOf(orderType);
+        this.orderType = OrderType.getEnum(orderType);
         this.orderAmount = new BigDecimal(orderAmount);
         this.itemInfoBOList = itemInfoBOList;
         this.createTime = new Timestamp(System.currentTimeMillis());
         this.deliveryEstimationMinutes = deliveryEstimation(5, 60);
+        this.dietRestrictionNote = dietRestrictionNote;
     }
 
     private Integer deliveryEstimation(Integer min, Integer max){

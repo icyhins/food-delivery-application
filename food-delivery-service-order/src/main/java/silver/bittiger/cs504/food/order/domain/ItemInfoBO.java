@@ -1,4 +1,4 @@
-package silver.bittiger.cs504.food.order.bean;
+package silver.bittiger.cs504.food.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
