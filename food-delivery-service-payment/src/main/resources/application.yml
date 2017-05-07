@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: food-delivery-payment-service
+    name: food-delivery-service-payment

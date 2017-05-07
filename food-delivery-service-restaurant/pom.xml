@@ -6,10 +6,11 @@
         <artifactId>food-delivery-service-parent</artifactId>
         <groupId>com.bitttiger.cs504</groupId>
         <version>1.0.0.BUILD-SNAPSHOT</version>
-        <relativePath>../food-delivery-service-parent/pom.xml</relativePath>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>food-delivery-service-restaurant</artifactId>
+    <name>Food Delivery Restaurant</name>
 
 </project>
